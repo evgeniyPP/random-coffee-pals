@@ -10,6 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.2",
     "solid-js": "^1.4.7"
   },
   "devDependencies": {
