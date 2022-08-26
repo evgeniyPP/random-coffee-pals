@@ -1,8 +1,15 @@
+import { useNavigate } from '@solidjs/router';
 import type { Component } from 'solid-js';
 import { NewUserSchema } from '../schemas';
 import { supabase } from '../utils/api';
 
 const SignIn: Component = () => {
+  const navigate = useNavigate();
+
+  if (supabase.auth.user()?.id) {
+    navigate('/', { replace: true });
+  }
+
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
 

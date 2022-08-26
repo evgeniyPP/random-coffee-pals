@@ -1,3 +1,4 @@
+import { Link } from '@solidjs/router';
 import type { Component } from 'solid-js';
 
 const Intro: Component = () => {
@@ -7,12 +8,15 @@ const Intro: Component = () => {
         <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           Random Coffee Pals
         </h2>
-        <p class="text-xl mt-4">A tool to randomize online coffee breaks with your team</p>
+        <p class="text-xl mt-4">A tool to organise online coffee breaks with your team</p>
         <div class="mt-8 flex justify-center">
           <div class="inline-flex rounded-md shadow">
-            <button class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded text-white bg-yellow-700 hover:bg-yellow-800">
+            <Link
+              href="/login"
+              class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded text-white bg-yellow-700 hover:bg-yellow-800"
+            >
               Get started
-            </button>
+            </Link>
           </div>
         </div>
       </div>

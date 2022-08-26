@@ -10,6 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@solidjs/router": "^0.4.2",
     "@supabase/supabase-js": "^1.35.6",
     "@tailwindcss/forms": "^0.5.2",
     "solid-js": "^1.4.7",
