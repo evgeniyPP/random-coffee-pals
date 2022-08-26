@@ -1,6 +1,35 @@
 import type { Component } from 'solid-js';
+import { NewUserSchema } from '../schemas';
+import { supabase } from '../utils/api';
 
 const SignIn: Component = () => {
+  const handleSubmit = async (e: SubmitEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const values = Object.fromEntries(formData.entries()) as Record<string, string>;
+
+    const validation = NewUserSchema.safeParse(values);
+
+    if (!validation.success) {
+      // TODO: handle errors
+      return;
+    }
+
+    const { data } = validation;
+    const { error } = await supabase.auth.signIn({
+      email: data.email,
+      password: data.password
+    });
+
+    if (error) {
+      // TODO: handle errors
+      return;
+    }
+
+    window.location.href = '/';
+  };
+
   return (
     <>
       <div class="min-h-screen flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
@@ -22,18 +51,17 @@ const SignIn: Component = () => {
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div class="bg-white py-8 px-4 sm:rounded-lg sm:px-10">
-            <div class="space-y-6">
+            <form onSubmit={handleSubmit} class="space-y-6">
               <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">
-                  Company Name
+                <label for="email" class="block text-sm font-medium text-gray-700">
+                  Email
                 </label>
                 <div class="mt-1">
                   <input
-                    id="name"
-                    name="name"
-                    type="name"
-                    autocomplete="name"
-                    required
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-600 focus:border-yellow-600 sm:text-sm"
                   />
                 </div>
@@ -49,7 +77,6 @@ const SignIn: Component = () => {
                     name="password"
                     type="password"
                     autocomplete="current-password"
-                    required
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-600 focus:border-yellow-600 sm:text-sm"
                   />
                 </div>
@@ -63,7 +90,7 @@ const SignIn: Component = () => {
                   Sign in
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

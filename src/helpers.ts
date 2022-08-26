@@ -1,12 +1,12 @@
-import { User, UserId } from './models';
+import { Member, MemberId } from './models';
 
 const THRESHOLD = 3; // TODO: get from api
 
-export function getRandomUser(users: User[], exclude: UserId[] = []): User {
+export function getRandomMember(users: Member[], exclude: MemberId[] = []): Member {
   return getRandomArrayItem(users.filter(u => !exclude.includes(u.id)));
 }
 
-// export function getLastMeetsUsers(userId: UserId): UserId[] {
+// export function getLastMeetsMembers(userId: MemberId): MemberId[] {
 //   const totalPals = USERS_TABLE.length - 1;
 //   const meetsCount = totalPals - 1 > THRESHOLD ? THRESHOLD : totalPals - 1;
 //   const lastMeets = MEETS_TABLE.slice(-meetsCount).filter(
