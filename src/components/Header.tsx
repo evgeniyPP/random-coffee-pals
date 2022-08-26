@@ -23,7 +23,7 @@ const Header: Component = () => {
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
           <div class="w-full py-6 flex items-center justify-between border-b border-yellow-500 lg:border-none">
             <div class="flex items-center">
-              <h1 class="text-lg font-medium text-white">Random Coffee Pals</h1>
+              <h1 class="text-lg font-bold text-white">Random Coffee Pals</h1>
             </div>
             <div class="ml-10 space-x-4">
               <button
