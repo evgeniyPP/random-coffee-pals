@@ -20,6 +20,7 @@ const SignIn: Component = () => {
 
     if (!validation.success) {
       // TODO: handle errors
+      console.error(validation.error);
       return;
     }
 
@@ -31,6 +32,7 @@ const SignIn: Component = () => {
 
     if (error) {
       // TODO: handle errors
+      console.error(error);
       return;
     }
 

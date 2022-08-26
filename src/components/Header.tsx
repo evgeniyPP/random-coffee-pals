@@ -10,6 +10,7 @@ const Header: Component = () => {
 
     if (error) {
       // TODO: handle errors
+      console.error(error);
       return;
     }
 

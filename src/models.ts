@@ -52,3 +52,5 @@ export interface NewMeet {
   member_1: MemberId;
   member_2: MemberId;
 }
+
+export type FetchStatus = 'empty' | 'fetching' | 'fetched';
