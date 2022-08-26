@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import Header from '../components/Header';
 import { supabase } from '../utils/api';
 import Intro from './Intro';
 
@@ -11,7 +12,7 @@ const Home: Component = () => {
 
   return (
     <>
-      <h1 class="font-black text-2xl">HOME PAGE</h1>
+      <Header />
     </>
   );
 };

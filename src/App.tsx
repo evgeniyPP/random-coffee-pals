@@ -1,8 +1,8 @@
 import { Route, Routes } from '@solidjs/router';
-import { Component } from 'solid-js';
+import { Component, lazy } from 'solid-js';
 
-import Home from './pages/Home';
-import SignIn from './pages/SignIn';
+const SignIn = lazy(() => import('./pages/SignIn'));
+const Home = lazy(() => import('./pages/Home'));
 
 const App: Component = () => {
   return (
