@@ -16,6 +16,13 @@ export async function createMeets(breakId: BreakId): Promise<NewMeet[]> {
   while (membersToPair.length > 1) {
     const excludedUsers = meets.map(p => [p.member_1, p.member_2]).flat();
     const pair = await getPair(membersToPair[0], activeMembers, excludedUsers);
+
+    if (!pair) {
+      meets = [];
+      membersToPair = shuffleArray(activeMembers);
+      continue;
+    }
+
     const [{ id: member_1 }, { id: member_2 }] = pair;
     meets.push({ break_id: breakId, member_1, member_2 });
     membersToPair = membersToPair.filter(u => ![member_1, member_2].includes(u.id));
@@ -28,9 +35,13 @@ async function getPair(
   member: Member,
   members: Member[],
   exclude: MemberId[] = []
-): Promise<[Member, Member]> {
+): Promise<[Member, Member] | null> {
   const randomMember = getRandomMember(members, [member.id, ...exclude]);
   const lastMeetsUsers = await getLastMeetsMembers(member.id);
+
+  if (!randomMember) {
+    return null;
+  }
 
   if (lastMeetsUsers.includes(randomMember.id)) {
     return getPair(member, members, [...exclude, randomMember.id]);
@@ -63,6 +74,6 @@ function shuffleArray<T = any>(initialArray: T[]): T[] {
   return arr;
 }
 
-function getRandomArrayItem<T = any>(arr: T[]): T {
+export function getRandomArrayItem<T = any>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }

@@ -9,7 +9,7 @@
 }
 
 .min-h-main {
-  --header-height: 90px;
+  --header-height: 93px;
   min-height: calc(100vh - var(--header-height));
 }
 

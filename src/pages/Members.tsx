@@ -1,14 +1,19 @@
+import { useNavigate } from '@solidjs/router';
 import { Component, onMount, Show } from 'solid-js';
 import AddMember from '../components/AddMember';
 import MembersList from '../components/MembersList';
 import { openModal } from '../components/Modal';
 import { Break, Meet } from '../models';
-import { getMeets, meets } from '../stores/meets';
+import { isLoading, setIsLoading } from '../stores/loading';
+import { getMeets } from '../stores/meets';
 import { getMembers, members } from '../stores/members';
 import { supabase } from '../utils/api';
 import { createMeets } from '../utils/helpers';
+import { getUniqueName } from '../utils/name-generator';
 
 const Members: Component = () => {
+  const navigate = useNavigate();
+
   onMount(async () => {
     await getMembers();
   });
@@ -31,18 +36,20 @@ const Members: Component = () => {
   const generate = async () => {
     const user = supabase.auth.user();
 
-    if (!user) {
+    if (!user?.id) {
       throw new Error('Generating a break but no users');
     }
 
+    setIsLoading(true);
     const { data: breakData, error: breakError } = await supabase
       .from<Break>('breaks')
-      .insert({ user_id: user.id })
+      .insert({ user_id: user.id, name: getUniqueName() })
       .single();
 
     if (breakError) {
       // TODO: handle errors
       console.error(breakError);
+      setIsLoading(false);
       return;
     }
 
@@ -54,11 +61,13 @@ const Members: Component = () => {
     if (meetsError) {
       // TODO: handle errors
       console.error(meetsError);
+      setIsLoading(false);
       return;
     }
 
     await getMeets(breakData.id, { refetch: true });
-    console.log(meets());
+    setIsLoading(false);
+    navigate(`/breaks/${breakData.id}`);
   };
 
   return (
@@ -72,6 +81,7 @@ const Members: Component = () => {
 
         <button
           onClick={handleGenerateClick}
+          disabled={isLoading()}
           class="mt-8 inline-flex justify-center items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-yellow-700 hover:bg-yellow-800 focus-default"
         >
           <svg

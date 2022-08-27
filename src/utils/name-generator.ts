@@ -1,0 +1,41 @@
+import { getRandomArrayItem } from './helpers';
+
+const coffees = [
+  'Cappuccino',
+  'Cortado',
+  'Latte',
+  'Red Eye',
+  'Mocha',
+  'Raf',
+  'Macchiato',
+  'Cold Brew',
+  'Espresso Con Panna',
+  'Café Cubano',
+  'Espresso Romano',
+  'Nitro',
+  'Turkish',
+  'Piccolo Latte',
+  'Long Black',
+  'Flat White',
+  'Cà Phê Sữa Đá',
+  'Frappé',
+  'Caffè Breve',
+  'Bulletproof',
+  'Caffé Doppio',
+  'Galão',
+  'Caffé Lungo',
+  'Ristretto',
+  'Affogato',
+  'Café au Lait',
+  'Irish',
+  'Vienna',
+  'Quad Shots',
+  'Brewed',
+  'Freddo',
+  'Americano',
+  'Chicory',
+  'Espresso Martini',
+  'Mexican'
+];
+
+export const getUniqueName = () => getRandomArrayItem(coffees);

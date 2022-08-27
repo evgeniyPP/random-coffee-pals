@@ -1,6 +1,6 @@
 export type UserId = string;
 export type MemberId = number;
-export type BreakId = number;
+export type BreakId = string;
 export type MeetId = number;
 
 export interface User {
@@ -32,11 +32,13 @@ export interface NewMember {
 export interface Break {
   id: BreakId;
   user_id: UserId;
+  name: string;
   created_at: string;
 }
 
 export interface NewBreak {
   user_id: UserId;
+  name: string;
 }
 
 export interface Meet {
@@ -44,6 +46,14 @@ export interface Meet {
   break_id: BreakId;
   member_1: MemberId;
   member_2: MemberId;
+  created_at: string;
+}
+
+export interface MeetWithNames {
+  id: MeetId;
+  break_id: BreakId;
+  member_1: { name: string };
+  member_2: { name: string };
   created_at: string;
 }
 

@@ -1,10 +1,10 @@
 import { createSignal } from 'solid-js';
-import { BreakId, FetchStatus, Meet, MemberId } from '../models';
+import { BreakId, FetchStatus, Meet, MeetWithNames, MemberId } from '../models';
 import { supabase } from '../utils/api';
 import { setIsLoading } from './loading';
 import { members } from './members';
 
-export const [meets, setMeets] = createSignal<Record<BreakId, Meet[]>>({});
+export const [meets, setMeets] = createSignal<Record<BreakId, MeetWithNames[]>>({});
 const [status, setStatus] = createSignal<FetchStatus>('empty');
 
 export async function getMeets(breakId: BreakId, options?: { refetch: boolean }) {
@@ -14,17 +14,10 @@ export async function getMeets(breakId: BreakId, options?: { refetch: boolean })
 
   setStatus('fetching');
   setIsLoading(true);
-  const user = supabase.auth.user();
-
-  if (!user?.id) {
-    setStatus('empty');
-    setIsLoading(false);
-    throw new Error('Try to get members, but no user');
-  }
 
   const { data, error } = await supabase
-    .from<Meet>('meets')
-    .select('member_1 (name), member_2 (name)')
+    .from<MeetWithNames>('meets')
+    .select('break_id, member_1 (name), member_2 (name)')
     .eq('break_id', breakId);
 
   if (error) {
