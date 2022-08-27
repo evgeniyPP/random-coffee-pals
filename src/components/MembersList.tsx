@@ -1,4 +1,4 @@
-import { createSignal, For, Match, onMount, Switch } from 'solid-js';
+import { createSignal, For, Match, Switch } from 'solid-js';
 import type { Component } from 'solid-js';
 import { getMembers, members } from '../stores/members';
 import { Member, MemberId } from '../models';
@@ -8,10 +8,6 @@ import { openModal } from './Modal';
 const MembersList: Component = () => {
   const [editedMemberId, setEditedMemberId] = createSignal<number | null>(null);
   const [editedMemberName, setEditedMemberName] = createSignal('');
-
-  onMount(async () => {
-    await getMembers();
-  });
 
   const handleUserStatus = async (member: Member) => {
     const { error } = await supabase
@@ -78,7 +74,7 @@ const MembersList: Component = () => {
   };
 
   return (
-    <ul role="list" class="divide-y divide-gray-200">
+    <ul role="list" class="divide-y divide-gray-200 mt-8">
       <For each={members()}>
         {member => (
           <li class="py-4">
