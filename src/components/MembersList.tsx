@@ -86,7 +86,7 @@ const MembersList: Component = () => {
       <For each={members()}>
         {member => (
           <li class="py-4">
-            <div class="flex items-center space-x-4">
+            <div class="flex flex-col sm:flex-row gap-4 items-center space-x-4">
               <div class="flex-1 min-w-0">
                 <Switch>
                   <Match when={editedMemberId() !== member.id}>
