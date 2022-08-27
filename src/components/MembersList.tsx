@@ -74,8 +74,15 @@ const MembersList: Component = () => {
     await getMembers({ refetch: true });
   };
 
+  const ref = document.getElementById('members-list');
+
   return (
-    <ul role="list" class="divide-y divide-gray-200 mt-8">
+    <ul
+      id="members-list"
+      role="list"
+      class="divide-y divide-gray-200 mt-8 max-h-[400px] overflow-auto"
+      classList={{ 'pr-2': !!ref && ref.clientHeight > 400 }}
+    >
       <For each={members()}>
         {member => (
           <li class="py-4">
