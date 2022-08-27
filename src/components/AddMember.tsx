@@ -72,7 +72,7 @@ const AddMember: Component = () => {
       <button
         onClick={openAddModal}
         disabled={isLoading() || !name().length}
-        class="mt-6 inline-flex items-center shadow-sm px-4 py-1.5 border border-gray-300 leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus-default"
+        class="mt-6 shadow-sm px-4 py-1.5 border border-gray-300 leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus-default"
       >
         Add
       </button>

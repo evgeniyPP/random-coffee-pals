@@ -78,7 +78,7 @@ const Modal: Component = () => {
                 }}
                 disabled={isLoading()}
                 type="button"
-                class={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white focus-default sm:ml-3 sm:w-auto sm:text-sm`}
+                class={`w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white focus-default sm:ml-3 sm:w-auto sm:text-sm`}
                 classList={{
                   'bg-yellow-600': color() === 'yellow',
                   'bg-green-600': color() === 'green',
@@ -93,7 +93,7 @@ const Modal: Component = () => {
               <button
                 onClick={closeModal}
                 type="button"
-                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus-default sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                class="mt-3 w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus-default sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Cancel
               </button>
