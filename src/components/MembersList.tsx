@@ -93,14 +93,11 @@ const MembersList: Component = () => {
     setIsLoading(false);
   };
 
-  const ref = document.getElementById('members-list');
-
   return (
     <ul
       id="members-list"
       role="list"
-      class="divide-y divide-gray-200 mt-8 max-h-[400px] overflow-auto"
-      classList={{ 'pr-2': !!ref && ref.clientHeight > 400 }}
+      class="divide-y divide-gray-200 mt-8 max-h-[589px] overflow-auto pr-2"
     >
       <For each={members()}>
         {member => (
