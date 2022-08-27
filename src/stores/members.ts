@@ -22,7 +22,7 @@ export async function getMembers(options?: { refetch: boolean }) {
   }
 
   const { data, error } = await supabase
-    .from('members')
+    .from<Member>('members')
     .select('id, name, is_active')
     .eq('user_id', user.id)
     .order('is_active', { ascending: false })

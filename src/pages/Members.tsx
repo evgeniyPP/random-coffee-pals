@@ -2,7 +2,11 @@ import { Component, onMount, Show } from 'solid-js';
 import AddMember from '../components/AddMember';
 import MembersList from '../components/MembersList';
 import { openModal } from '../components/Modal';
+import { Break, Meet } from '../models';
+import { getMeets, meets } from '../stores/meets';
 import { getMembers, members } from '../stores/members';
+import { supabase } from '../utils/api';
+import { createMeets } from '../utils/helpers';
 
 const Members: Component = () => {
   onMount(async () => {
@@ -24,7 +28,38 @@ const Members: Component = () => {
     generate();
   };
 
-  const generate = () => {};
+  const generate = async () => {
+    const user = supabase.auth.user();
+
+    if (!user) {
+      throw new Error('Generating a break but no users');
+    }
+
+    const { data: breakData, error: breakError } = await supabase
+      .from<Break>('breaks')
+      .insert({ user_id: user.id })
+      .single();
+
+    if (breakError) {
+      // TODO: handle errors
+      console.error(breakError);
+      return;
+    }
+
+    const newMeets = await createMeets(breakData.id);
+    const { error: meetsError } = await supabase
+      .from<Meet>('meets')
+      .insert(newMeets, { returning: 'minimal' });
+
+    if (meetsError) {
+      // TODO: handle errors
+      console.error(meetsError);
+      return;
+    }
+
+    await getMeets(breakData.id, { refetch: true });
+    console.log(meets());
+  };
 
   return (
     <Show when={members()?.length}>

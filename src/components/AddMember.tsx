@@ -1,5 +1,5 @@
 import { Component, createSignal } from 'solid-js';
-import { z } from 'zod';
+import { Member } from '../models';
 import { isLoading, setIsLoading } from '../stores/loading';
 import { getMembers } from '../stores/members';
 import { supabase } from '../utils/api';
@@ -28,21 +28,15 @@ const AddMember: Component = () => {
       throw new Error('Adding a new member but no user');
     }
 
-    const validation = z.string().safeParse(name());
-
-    if (!validation.success) {
-      // TODO: handle errors
-      console.error(validation.error);
-      return;
-    }
-
     setIsLoading(true);
-    const { data } = validation;
-    const { error } = await supabase.from('members').insert({
-      user_id: user.id,
-      name: data,
-      is_active: true
-    });
+    const { error } = await supabase.from<Member>('members').insert(
+      {
+        user_id: user.id,
+        name: name(),
+        is_active: true
+      },
+      { returning: 'minimal' }
+    );
 
     if (error) {
       // TODO: handle errors
@@ -77,7 +71,7 @@ const AddMember: Component = () => {
       </div>
       <button
         onClick={openAddModal}
-        disabled={isLoading()}
+        disabled={isLoading() || !name().length}
         class="mt-6 inline-flex items-center shadow-sm px-4 py-1.5 border border-gray-300 leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus-default"
       >
         Add

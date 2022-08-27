@@ -13,8 +13,8 @@ const MembersList: Component = () => {
   const handleUserStatus = async (member: Member) => {
     setIsLoading(true);
     const { error } = await supabase
-      .from('members')
-      .update({ is_active: !member.is_active })
+      .from<Member>('members')
+      .update({ is_active: !member.is_active }, { returning: 'minimal' })
       .eq('id', member.id);
 
     if (error) {
@@ -35,11 +35,17 @@ const MembersList: Component = () => {
       return;
     }
 
+    const id = editedMemberId();
+
+    if (!id) {
+      throw new Error('Updating member but no editedMemberId');
+    }
+
     setIsLoading(true);
     const { error } = await supabase
-      .from('members')
+      .from<Member>('members')
       .update({ name: editedMemberName() })
-      .eq('id', editedMemberId());
+      .eq('id', id);
 
     if (error) {
       // TODO: handle errors
@@ -71,7 +77,10 @@ const MembersList: Component = () => {
 
   const deleteMember = async (id: MemberId) => {
     setIsLoading(true);
-    const { error } = await supabase.from('members').delete().eq('id', id);
+    const { error } = await supabase
+      .from<Member>('members')
+      .delete({ returning: 'minimal' })
+      .eq('id', id);
 
     if (error) {
       // TODO: handle errors
@@ -125,9 +134,10 @@ const MembersList: Component = () => {
                         />
                         <button
                           onClick={() => handleEdit(member)}
-                          disabled={isLoading()}
+                          disabled={isLoading() || !editedMemberName().length}
                           class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus-default"
                         >
+                          <span class="sr-only">Update name</span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
