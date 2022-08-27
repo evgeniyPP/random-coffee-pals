@@ -1,8 +1,7 @@
 import { createSignal } from 'solid-js';
-import { BreakId, FetchStatus, Meet, MeetWithNames, MemberId } from '../models';
+import { BreakId, FetchStatus, MeetWithNames } from '../models';
 import { supabase } from '../utils/api';
 import { setIsLoading } from './loading';
-import { members } from './members';
 
 export const [meets, setMeets] = createSignal<Record<BreakId, MeetWithNames[]>>({});
 const [status, setStatus] = createSignal<FetchStatus>('empty');
@@ -32,36 +31,4 @@ export async function getMeets(breakId: BreakId, options?: { refetch: boolean })
   setIsLoading(false);
 
   return { success: true, isFetched: true };
-}
-
-const [lastMeets, setLastMeets] = createSignal<Record<string, Meet[]>>({});
-
-export async function getLastMeets(breakId: BreakId | null, memberId: MemberId): Promise<Meet[]> {
-  const cacheId = `${breakId}_${memberId}`;
-
-  if (breakId && Object.hasOwn(lastMeets(), cacheId)) {
-    return lastMeets()[cacheId];
-  }
-
-  const maxPairNum = Math.ceil(members().length / 2);
-  const threshold = maxPairNum > 3 ? 3 : maxPairNum - 1;
-
-  const { data, error } = await supabase
-    .from<Meet>('meets')
-    .select('id, member_1, member_2')
-    .or(`member_1.eq.${memberId}, member_2.eq.${memberId}`)
-    .order('id', { ascending: false })
-    .limit(threshold);
-
-  if (error) {
-    // TODO: handle errors
-    console.error(error);
-    return [];
-  }
-
-  if (breakId) {
-    setLastMeets(prev => ({ ...prev, [cacheId]: data }));
-  }
-
-  return data;
 }

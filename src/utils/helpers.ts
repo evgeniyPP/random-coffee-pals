@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
 import { BreakId, Member, MemberId, NewMeet } from '../models';
-import { getLastMeets } from '../stores/meets';
+import { getLastMeets } from '../stores/last-meets';
 import { members } from '../stores/members';
 
 const [currentBreakId, setCurrentBreakId] = createSignal<BreakId | null>(null);
