@@ -1,7 +1,6 @@
 import { useParams } from '@solidjs/router';
 import { Component, createResource, For, onMount, Show } from 'solid-js';
 import Header from '../components/Header';
-import Modal from '../components/Modal';
 import { Break as IBreak, BreakId } from '../models';
 import { getMeets, meets } from '../stores/meets';
 import { supabase } from '../utils/api';
@@ -58,8 +57,6 @@ const Break: Component = () => {
           </div>
         </Show>
       </div>
-
-      <Modal />
     </>
   );
 };

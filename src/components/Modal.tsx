@@ -5,7 +5,7 @@ export interface ModalOptions {
   title: string;
   content: string;
   action: () => void;
-  actionLabel: string;
+  actionLabel?: string;
   type?: 'default' | 'success' | 'danger';
 }
 
@@ -15,14 +15,14 @@ const [title, setTitle] = createSignal('');
 const [content, setContent] = createSignal('');
 const [color, setColor] = createSignal(colorByType.default);
 const [action, setAction] = createSignal<(() => void) | null>(null);
-const [actionLabel, setActionLabel] = createSignal('');
+const [actionLabel, setActionLabel] = createSignal('Confirm');
 
 export function openModal(options: ModalOptions) {
   setTitle(options.title);
   setContent(options.content);
-  setColor(colorByType[options.type ?? 'default']);
   setAction(() => options.action);
-  setActionLabel(options.actionLabel);
+  setActionLabel(options.actionLabel ?? 'Confirm');
+  setColor(colorByType[options.type ?? 'default']);
   setIsModalOpen(true);
 }
 
@@ -30,9 +30,9 @@ export function closeModal() {
   setIsModalOpen(false);
   setTitle('');
   setContent('');
-  setColor(colorByType.default);
   setAction(null);
   setActionLabel('');
+  setColor(colorByType.default);
 }
 
 const Modal: Component = () => {
