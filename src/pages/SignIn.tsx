@@ -36,7 +36,7 @@ const SignIn: Component = () => {
       return;
     }
 
-    window.location.href = '/';
+    navigate('/', { replace: true });
   };
 
   return (

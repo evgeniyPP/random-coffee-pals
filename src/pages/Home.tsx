@@ -15,7 +15,7 @@ const Home: Component = () => {
   return (
     <>
       <Header />
-      <div class="bg-white min-h-screen">
+      <div class="bg-white min-h-main">
         <Teammates />
       </div>
 

@@ -3,8 +3,9 @@ import { Component, createSignal, Show } from 'solid-js';
 export interface ModalOptions {
   title: string;
   content: string;
-  type: 'default' | 'success' | 'danger';
   action: () => void;
+  actionLabel: string;
+  type?: 'default' | 'success' | 'danger';
 }
 
 const colorByType = { default: 'yellow', success: 'green', danger: 'red' };
@@ -13,12 +14,14 @@ const [title, setTitle] = createSignal('');
 const [content, setContent] = createSignal('');
 const [color, setColor] = createSignal(colorByType.default);
 const [action, setAction] = createSignal<(() => void) | null>(null);
+const [actionLabel, setActionLabel] = createSignal('');
 
 export function openModal(options: ModalOptions) {
   setTitle(options.title);
   setContent(options.content);
-  setColor(colorByType[options.type]);
+  setColor(colorByType[options.type ?? 'default']);
   setAction(() => options.action);
+  setActionLabel(options.actionLabel);
   setIsModalOpen(true);
 }
 
@@ -28,6 +31,7 @@ export function closeModal() {
   setContent('');
   setColor(colorByType.default);
   setAction(null);
+  setActionLabel('');
 }
 
 const Modal: Component = () => {
@@ -82,7 +86,7 @@ const Modal: Component = () => {
                   'hover:bg-red-700`': color() === 'red'
                 }}
               >
-                Delete
+                {actionLabel()}
               </button>
               <button
                 onClick={closeModal}

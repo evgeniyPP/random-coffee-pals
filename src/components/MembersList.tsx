@@ -55,9 +55,10 @@ const MembersList: Component = () => {
   const openDeleteModal = (member: Member) => {
     openModal({
       title: 'Delete teammate',
-      content: 'Are you sure you want to delete this teammate',
+      content: `Are you sure you want to delete ${member.name}?`,
       type: 'danger',
-      action: () => deleteMember(member.id)
+      action: () => deleteMember(member.id),
+      actionLabel: 'Delete'
     });
   };
 
