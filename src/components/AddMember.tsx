@@ -14,8 +14,8 @@ const AddMember: Component = () => {
     }
 
     openModal({
-      title: 'Add a new teammate',
-      content: `Are you sure you want to add ${name()} as your teammate?`,
+      title: 'Add a new coffee pal?',
+      content: `Are you sure you want to add ${name()} as your coffee pal?`,
       action: () => handleAdd(),
       actionLabel: 'Add'
     });
@@ -60,7 +60,7 @@ const AddMember: Component = () => {
     <div class="mt-8 flex items-center space-x-4">
       <div class="flex-1">
         <label for="name" class="block text-sm font-medium text-gray-700">
-          Add a new teammate
+          Add a new coffee pal
         </label>
         <div class="mt-1">
           <input
@@ -71,7 +71,7 @@ const AddMember: Component = () => {
             name="name"
             id="name"
             class="shadow-sm block w-full sm:text-sm border-gray-300 rounded-md focus-default"
-            placeholder="Teammate name"
+            placeholder="Pal's name"
           />
         </div>
       </div>

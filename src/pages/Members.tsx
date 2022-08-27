@@ -4,7 +4,7 @@ import MembersList from '../components/MembersList';
 import { openModal } from '../components/Modal';
 import { getMembers, members } from '../stores/members';
 
-const Teammates: Component = () => {
+const Members: Component = () => {
   onMount(async () => {
     await getMembers();
   });
@@ -14,7 +14,7 @@ const Teammates: Component = () => {
 
     if (activeMembers.length % 2 !== 0) {
       openModal({
-        title: 'You have an odd number of active teammates',
+        title: 'You have an odd number of active pals',
         content: 'This means someone will not get a pair. Are you sure you want to continue?',
         action: () => generate(),
         actionLabel: 'Continue'
@@ -30,7 +30,7 @@ const Teammates: Component = () => {
     <Show when={members()?.length}>
       <div class="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex flex-col">
         <h2 class="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          Your Teammates
+          Your Coffee Pals
         </h2>
         <MembersList />
         <AddMember />
@@ -60,4 +60,4 @@ const Teammates: Component = () => {
   );
 };
 
-export default Teammates;
+export default Members;

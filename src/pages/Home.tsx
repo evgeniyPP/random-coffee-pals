@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Modal from '../components/Modal';
 import { supabase } from '../utils/api';
 import Intro from './Intro';
-import Teammates from './Teammates';
+import Members from './Members';
 
 const Home: Component = () => {
   const user = supabase.auth.user();
@@ -16,7 +16,7 @@ const Home: Component = () => {
     <>
       <Header />
       <div class="bg-white min-h-main">
-        <Teammates />
+        <Members />
       </div>
 
       <Modal />

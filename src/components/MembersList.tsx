@@ -61,7 +61,7 @@ const MembersList: Component = () => {
 
   const openDeleteModal = (member: Member) => {
     openModal({
-      title: 'Delete teammate',
+      title: 'Delete your pal?',
       content: `Are you sure you want to delete ${member.name}?`,
       type: 'danger',
       action: () => deleteMember(member.id),
@@ -110,7 +110,7 @@ const MembersList: Component = () => {
                   <Match when={editedMemberId() === member.id}>
                     <div>
                       <label for="name" class="sr-only">
-                        Teammate name
+                        Pal's name
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm">
                         <input
