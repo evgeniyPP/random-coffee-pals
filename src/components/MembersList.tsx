@@ -105,12 +105,12 @@ const MembersList: Component = () => {
                           type="text"
                           name="name"
                           id="name"
-                          class="focus:ring-yellow-500 focus:border-yellow-500 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300"
+                          class="block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 focus-default"
                           placeholder={member.name}
                         />
                         <button
                           onClick={() => handleEdit(member)}
-                          class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500"
+                          class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus-default"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +137,7 @@ const MembersList: Component = () => {
                   <Match when={member.is_active}>
                     <button
                       onClick={() => handleUserStatus(member)}
-                      class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50"
+                      class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus-default"
                     >
                       Make inactive
                     </button>
@@ -145,7 +145,7 @@ const MembersList: Component = () => {
                   <Match when={!member.is_active}>
                     <button
                       onClick={() => handleUserStatus(member)}
-                      class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-green-300 text-sm leading-5 font-medium rounded-full text-green-700 bg-white hover:bg-green-50"
+                      class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-green-300 text-sm leading-5 font-medium rounded-full text-green-700 bg-white hover:bg-green-50 focus-default"
                     >
                       Make active
                     </button>
@@ -153,13 +153,13 @@ const MembersList: Component = () => {
                 </Switch>
                 <button
                   onClick={() => setEditedMember(member)}
-                  class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-yellow-300 text-sm leading-5 font-medium rounded-full text-yellow-700 bg-white hover:bg-yellow-50"
+                  class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-yellow-300 text-sm leading-5 font-medium rounded-full text-yellow-700 bg-white hover:bg-yellow-50 focus-default"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => openDeleteModal(member)}
-                  class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-red-300 text-sm leading-5 font-medium rounded-full text-red-700 bg-white hover:bg-red-50"
+                  class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-red-300 text-sm leading-5 font-medium rounded-full text-red-700 bg-white hover:bg-red-50 focus-default"
                 >
                   Delete
                 </button>
