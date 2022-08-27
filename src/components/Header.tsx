@@ -1,20 +1,24 @@
 import { useNavigate } from '@solidjs/router';
 import type { Component } from 'solid-js';
+import { isLoading, setIsLoading } from '../stores/loading';
 import { supabase } from '../utils/api';
 
 const Header: Component = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    setIsLoading(true);
     const { error } = await supabase.auth.signOut();
 
     if (error) {
       // TODO: handle errors
       console.error(error);
+      setIsLoading(false);
       return;
     }
 
     navigate('/login', { replace: true });
+    setIsLoading(false);
   };
 
   return (
@@ -28,6 +32,7 @@ const Header: Component = () => {
             <div class="sm:ml-10 space-x-4">
               <button
                 onClick={handleLogout}
+                disabled={isLoading()}
                 class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-yellow-800 hover:bg-yellow-50"
               >
                 Log out

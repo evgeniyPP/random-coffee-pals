@@ -1,6 +1,7 @@
 import { useNavigate } from '@solidjs/router';
 import type { Component } from 'solid-js';
 import { NewUserSchema } from '../schemas';
+import { isLoading, setIsLoading } from '../stores/loading';
 import { supabase } from '../utils/api';
 
 const SignIn: Component = () => {
@@ -24,6 +25,7 @@ const SignIn: Component = () => {
       return;
     }
 
+    setIsLoading(true);
     const { data } = validation;
     const { error } = await supabase.auth.signIn({
       email: data.email,
@@ -33,9 +35,11 @@ const SignIn: Component = () => {
     if (error) {
       // TODO: handle errors
       console.error(error);
+      setIsLoading(false);
       return;
     }
 
+    setIsLoading(false);
     navigate('/', { replace: true });
   };
 
@@ -71,6 +75,7 @@ const SignIn: Component = () => {
                     name="email"
                     type="email"
                     autocomplete="email"
+                    disabled={isLoading()}
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus-default sm:text-sm"
                   />
                 </div>
@@ -85,6 +90,7 @@ const SignIn: Component = () => {
                     id="password"
                     name="password"
                     type="password"
+                    disabled={isLoading()}
                     autocomplete="current-password"
                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus-default sm:text-sm"
                   />
@@ -94,6 +100,7 @@ const SignIn: Component = () => {
               <div>
                 <button
                   type="submit"
+                  disabled={isLoading()}
                   class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-700 hover:bg-yellow-800 focus-default"
                 >
                   Sign in

@@ -1,4 +1,5 @@
 import { Component, createSignal, Show } from 'solid-js';
+import { isLoading } from '../stores/loading';
 
 export interface ModalOptions {
   title: string;
@@ -75,6 +76,7 @@ const Modal: Component = () => {
                   if (cb) cb();
                   closeModal();
                 }}
+                disabled={isLoading()}
                 type="button"
                 class={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white focus-default sm:ml-3 sm:w-auto sm:text-sm`}
                 classList={{

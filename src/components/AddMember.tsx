@@ -1,5 +1,6 @@
 import { Component, createSignal } from 'solid-js';
 import { z } from 'zod';
+import { isLoading, setIsLoading } from '../stores/loading';
 import { getMembers } from '../stores/members';
 import { supabase } from '../utils/api';
 import { openModal } from './Modal';
@@ -35,6 +36,7 @@ const AddMember: Component = () => {
       return;
     }
 
+    setIsLoading(true);
     const { data } = validation;
     const { error } = await supabase.from('members').insert({
       user_id: user.id,
@@ -45,11 +47,13 @@ const AddMember: Component = () => {
     if (error) {
       // TODO: handle errors
       console.error(error);
+      setIsLoading(false);
       return;
     }
 
     await getMembers({ refetch: true });
     setName('');
+    setIsLoading(false);
   };
 
   return (
@@ -62,6 +66,7 @@ const AddMember: Component = () => {
           <input
             onInput={e => setName(e.currentTarget.value)}
             value={name()}
+            disabled={isLoading()}
             type="text"
             name="name"
             id="name"
@@ -72,6 +77,7 @@ const AddMember: Component = () => {
       </div>
       <button
         onClick={openAddModal}
+        disabled={isLoading()}
         class="mt-6 inline-flex items-center shadow-sm px-4 py-1.5 border border-gray-300 leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus-default"
       >
         Add

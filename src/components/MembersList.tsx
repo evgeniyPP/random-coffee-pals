@@ -4,12 +4,14 @@ import { getMembers, members } from '../stores/members';
 import { Member, MemberId } from '../models';
 import { supabase } from '../utils/api';
 import { openModal } from './Modal';
+import { isLoading, setIsLoading } from '../stores/loading';
 
 const MembersList: Component = () => {
   const [editedMemberId, setEditedMemberId] = createSignal<number | null>(null);
   const [editedMemberName, setEditedMemberName] = createSignal('');
 
   const handleUserStatus = async (member: Member) => {
+    setIsLoading(true);
     const { error } = await supabase
       .from('members')
       .update({ is_active: !member.is_active })
@@ -18,10 +20,12 @@ const MembersList: Component = () => {
     if (error) {
       // TODO: handle errors
       console.error(error);
+      setIsLoading(false);
       return;
     }
 
     await getMembers({ refetch: true });
+    setIsLoading(false);
   };
 
   const handleEdit = async (member: Member) => {
@@ -31,6 +35,7 @@ const MembersList: Component = () => {
       return;
     }
 
+    setIsLoading(true);
     const { error } = await supabase
       .from('members')
       .update({ name: editedMemberName() })
@@ -39,12 +44,14 @@ const MembersList: Component = () => {
     if (error) {
       // TODO: handle errors
       console.error(error);
+      setIsLoading(false);
       return;
     }
 
     await getMembers({ refetch: true });
     setEditedMemberId(null);
     setEditedMemberName('');
+    setIsLoading(false);
   };
 
   const setEditedMember = (member: Member) => {
@@ -63,15 +70,18 @@ const MembersList: Component = () => {
   };
 
   const deleteMember = async (id: MemberId) => {
+    setIsLoading(true);
     const { error } = await supabase.from('members').delete().eq('id', id);
 
     if (error) {
       // TODO: handle errors
       console.error(error);
+      setIsLoading(false);
       return;
     }
 
     await getMembers({ refetch: true });
+    setIsLoading(false);
   };
 
   const ref = document.getElementById('members-list');
@@ -106,6 +116,7 @@ const MembersList: Component = () => {
                         <input
                           onInput={e => setEditedMemberName(e.currentTarget.value)}
                           value={editedMemberName()}
+                          disabled={isLoading()}
                           type="text"
                           name="name"
                           id="name"
@@ -114,6 +125,7 @@ const MembersList: Component = () => {
                         />
                         <button
                           onClick={() => handleEdit(member)}
+                          disabled={isLoading()}
                           class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus-default"
                         >
                           <svg
@@ -141,6 +153,7 @@ const MembersList: Component = () => {
                   <Match when={member.is_active}>
                     <button
                       onClick={() => handleUserStatus(member)}
+                      disabled={isLoading()}
                       class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus-default"
                     >
                       Make inactive
@@ -149,6 +162,7 @@ const MembersList: Component = () => {
                   <Match when={!member.is_active}>
                     <button
                       onClick={() => handleUserStatus(member)}
+                      disabled={isLoading()}
                       class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-green-300 text-sm leading-5 font-medium rounded-full text-green-700 bg-white hover:bg-green-50 focus-default"
                     >
                       Make active
@@ -157,12 +171,14 @@ const MembersList: Component = () => {
                 </Switch>
                 <button
                   onClick={() => setEditedMember(member)}
+                  disabled={isLoading()}
                   class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-yellow-300 text-sm leading-5 font-medium rounded-full text-yellow-700 bg-white hover:bg-yellow-50 focus-default"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => openDeleteModal(member)}
+                  disabled={isLoading()}
                   class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-red-300 text-sm leading-5 font-medium rounded-full text-red-700 bg-white hover:bg-red-50 focus-default"
                 >
                   Delete
