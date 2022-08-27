@@ -1,6 +1,7 @@
 import { Component } from 'solid-js';
 import Header from '../components/Header';
 import MembersList from '../components/MembersList';
+import Modal from '../components/Modal';
 import { supabase } from '../utils/api';
 import Intro from './Intro';
 
@@ -42,6 +43,8 @@ const Home: Component = () => {
           </div>
         </div>
       </div>
+
+      <Modal />
     </>
   );
 };

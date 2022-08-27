@@ -1,8 +1,9 @@
 import { createSignal, For, Match, onMount, Switch } from 'solid-js';
 import type { Component } from 'solid-js';
 import { getMembers, members } from '../stores/members';
-import { Member } from '../models';
+import { Member, MemberId } from '../models';
 import { supabase } from '../utils/api';
+import { openModal } from './Modal';
 
 const MembersList: Component = () => {
   const [editedMemberId, setEditedMemberId] = createSignal<number | null>(null);
@@ -53,6 +54,27 @@ const MembersList: Component = () => {
   const setEditedMember = (member: Member) => {
     setEditedMemberId(member.id);
     setEditedMemberName(member.name);
+  };
+
+  const openDeleteModal = (member: Member) => {
+    openModal({
+      title: 'Delete teammate',
+      content: 'Are you sure you want to delete this teammate',
+      type: 'danger',
+      action: () => deleteMember(member.id)
+    });
+  };
+
+  const deleteMember = async (id: MemberId) => {
+    const { error } = await supabase.from('members').delete().eq('id', id);
+
+    if (error) {
+      // TODO: handle errors
+      console.error(error);
+      return;
+    }
+
+    await getMembers({ refetch: true });
   };
 
   return (
@@ -135,7 +157,10 @@ const MembersList: Component = () => {
                 >
                   Edit
                 </button>
-                <button class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-red-300 text-sm leading-5 font-medium rounded-full text-red-700 bg-white hover:bg-red-50">
+                <button
+                  onClick={() => openDeleteModal(member)}
+                  class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-red-300 text-sm leading-5 font-medium rounded-full text-red-700 bg-white hover:bg-red-50"
+                >
                   Delete
                 </button>
               </div>
