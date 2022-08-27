@@ -28,6 +28,7 @@ const Members: Component = () => {
         action: () => generate(),
         actionLabel: 'Continue'
       });
+      return;
     }
 
     generate();
