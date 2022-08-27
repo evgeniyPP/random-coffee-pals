@@ -1,6 +1,6 @@
 import { Component } from 'solid-js';
-import Header from '../components/Header';
 import { supabase } from '../utils/api';
+import Layout from '../Layout';
 import Intro from './Intro';
 import Members from './Members';
 
@@ -12,12 +12,9 @@ const Home: Component = () => {
   }
 
   return (
-    <>
-      <Header />
-      <div class="bg-white min-h-main">
-        <Members />
-      </div>
-    </>
+    <Layout>
+      <Members />
+    </Layout>
   );
 };
 
