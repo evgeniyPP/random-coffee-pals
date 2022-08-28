@@ -39,7 +39,7 @@ const Notification: Component = () => {
       >
         {/* TODO: add transitions */}
         <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
-          <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+          <div class="max-w-sm w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
             <div class="p-4">
               <div class="flex items-start">
                 <div class="flex-shrink-0">
@@ -96,13 +96,13 @@ const Notification: Component = () => {
                   </Switch>
                 </div>
                 <div class="ml-3 w-0 flex-1 pt-0.5">
-                  <p class="text-sm font-medium text-gray-900">{title()}</p>
-                  <p class="mt-1 text-sm text-gray-500">{content()}</p>
+                  <p class="text-sm font-medium text-gray-900 dark:text-gray-100">{title()}</p>
+                  <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">{content()}</p>
                 </div>
                 <div class="ml-4 flex-shrink-0 flex">
                   <button
                     onClick={closeNotification}
-                    class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus-default"
+                    class="bg-white dark:bg-gray-800 rounded-md inline-flex text-gray-400 hover:text-gray-500 focus-default"
                   >
                     <span class="sr-only">Close</span>
                     <svg

@@ -118,14 +118,11 @@ const MembersList: Component = () => {
               <div class="flex-1 min-w-0">
                 <Switch>
                   <Match when={editedMemberId() !== member.id}>
-                    <p
-                      class="font-medium text-gray-900"
-                      classList={{ 'line-through': !member.is_active }}
-                    >
+                    <p class="font-medium" classList={{ 'line-through': !member.is_active }}>
                       {member.name}
                     </p>
                     <Show when={member.contact}>
-                      <p class="text-sm text-gray-500">{member.contact}</p>
+                      <p class="text-sm text-gray-500 dark:text-gray-400">{member.contact}</p>
                     </Show>
                   </Match>
                   <Match when={editedMemberId() === member.id}>
@@ -142,13 +139,13 @@ const MembersList: Component = () => {
                             type="text"
                             name="name"
                             id="name"
-                            class="block w-full rounded-none rounded-tl-md sm:text-sm border-gray-300 focus-default"
+                            class="block w-full rounded-none rounded-tl-md sm:text-sm border-gray-300 focus-default dark:bg-gray-900"
                             placeholder={member.name}
                           />
                           <button
                             onClick={() => handleEdit(member)}
                             disabled={isLoading() || !editedMemberName().length}
-                            class="-ml-px relative px-4 py-2 border border-gray-300 text-sm font-medium rounded-tr-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus-default"
+                            class="-ml-px relative px-4 py-2 border border-gray-300 text-sm font-medium rounded-tr-md btn-default focus-default"
                           >
                             <span class="sr-only">Update pal</span>
                             <svg
@@ -176,13 +173,13 @@ const MembersList: Component = () => {
                             type="text"
                             name="name"
                             id="name"
-                            class="block w-full rounded-none rounded-bl-md sm:text-sm border-gray-300 focus-default"
+                            class="block w-full rounded-none rounded-bl-md sm:text-sm border-gray-300 focus-default dark:bg-gray-900"
                             placeholder={member.contact ?? "Pal's contact"}
                           />
                           <button
                             onClick={() => clearEdit()}
                             disabled={isLoading()}
-                            class="-ml-px relative px-4 py-2 border border-gray-300 text-sm font-medium rounded-br-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus-default"
+                            class="-ml-px relative px-4 py-2 border border-gray-300 text-sm font-medium rounded-br-md btn-default focus-default"
                           >
                             <span class="sr-only">Cancel update</span>
                             <svg
@@ -212,7 +209,7 @@ const MembersList: Component = () => {
                     <button
                       onClick={() => handleUserStatus(member)}
                       disabled={isLoading() || !!editedMemberId()}
-                      class="shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus-default"
+                      class="shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full btn-default focus-default"
                     >
                       Make inactive
                     </button>
@@ -221,7 +218,7 @@ const MembersList: Component = () => {
                     <button
                       onClick={() => handleUserStatus(member)}
                       disabled={isLoading() || !!editedMemberId()}
-                      class="shadow-sm px-2.5 py-0.5 border border-green-300 text-sm leading-5 font-medium rounded-full text-green-700 bg-white hover:bg-green-50 focus-default"
+                      class="shadow-sm px-2.5 py-0.5 border border-green-300 text-sm leading-5 font-medium rounded-full btn-default focus-default"
                     >
                       Make active
                     </button>
@@ -230,14 +227,14 @@ const MembersList: Component = () => {
                 <button
                   onClick={() => setEditedMember(member)}
                   disabled={isLoading() || !!editedMemberId()}
-                  class="shadow-sm px-2.5 py-0.5 border border-yellow-300 text-sm leading-5 font-medium rounded-full text-yellow-700 bg-white hover:bg-yellow-50 focus-default"
+                  class="shadow-sm px-2.5 py-0.5 border border-yellow-300 text-sm leading-5 font-medium rounded-full btn-default dark:border-yellow-600 focus-default"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => openDeleteModal(member)}
                   disabled={isLoading() || !!editedMemberId()}
-                  class="shadow-sm px-2.5 py-0.5 border border-red-300 text-sm leading-5 font-medium rounded-full text-red-700 bg-white hover:bg-red-50 focus-default"
+                  class="shadow-sm px-2.5 py-0.5 border border-red-300 text-sm leading-5 font-medium rounded-full btn-default dark:border-red-900 focus-default"
                 >
                   Delete
                 </button>

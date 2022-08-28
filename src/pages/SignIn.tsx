@@ -50,28 +50,28 @@ const SignIn: Component = () => {
 
   return (
     <>
-      <div class="min-h-screen flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
+      <div class="theme-default min-h-screen flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
-          </h2>
-          <p class="mt-2 text-center text-sm text-gray-600">
-            If you want to sign up,
+          <h2 class="mt-6 text-center text-3xl font-extrabold">Sign in to your account</h2>
+          <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
+            If you want to sign up,{' '}
             <a
               href="mailto:aysanru@gmail.com"
-              class="font-medium text-yellow-700 hover:text-yellow-600"
+              class="font-medium text-yellow-700 hover:text-yellow-600 focus-default"
             >
-              {' '}
               contact me
             </a>
           </p>
         </div>
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div class="bg-white py-8 px-4 sm:rounded-lg sm:px-10">
+          <div class="py-8 px-4 sm:rounded-lg sm:px-10">
             <form onSubmit={handleSubmit} novalidate class="space-y-6">
               <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
                   Email
                 </label>
                 <div class="mt-1 relative">
@@ -81,7 +81,7 @@ const SignIn: Component = () => {
                     type="email"
                     autocomplete="email"
                     disabled={isLoading()}
-                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus-default sm:text-sm"
+                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus-default sm:text-sm dark:bg-gray-900"
                     classList={{ error: hasError('email') }}
                   />
                   <Show when={hasError('email')}>
@@ -110,7 +110,10 @@ const SignIn: Component = () => {
               </div>
 
               <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
                   Password
                 </label>
                 <div class="mt-1 relative">
@@ -120,7 +123,7 @@ const SignIn: Component = () => {
                     type="password"
                     disabled={isLoading()}
                     autocomplete="current-password"
-                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus-default sm:text-sm"
+                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus-default sm:text-sm dark:bg-gray-900"
                     classList={{ error: hasError('password') }}
                   />
                   <Show when={hasError('password')}>

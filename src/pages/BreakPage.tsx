@@ -38,7 +38,7 @@ const Break: Component = () => {
     <Layout>
       <Show when={meets()[breakId] && breakData()}>
         <div class="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex flex-col">
-          <h2 class="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl">
             {breakData()!.name} Coffee Break
           </h2>
           <p class="mt-4 text-center">{new Date(breakData()!.created_at).toLocaleDateString()}</p>
@@ -46,7 +46,7 @@ const Break: Component = () => {
           <div class="mt-8 space-y-4">
             <For each={meets()[breakId]}>
               {({ member_1, member_2 }) => (
-                <div class="shadow-lg rounded-lg bg-white sm:grid sm:grid-cols-2">
+                <div class="shadow-lg rounded-lg bg-white dark:bg-gray-800 sm:grid sm:grid-cols-2">
                   <div class="border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
                     <p class="text-xl font-bold">{member_1.name}</p>
                     <Show when={member_1.contact}>

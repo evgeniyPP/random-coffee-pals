@@ -75,7 +75,7 @@ const Members: Component = () => {
   return (
     <Show when={members()?.length}>
       <div class="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex flex-col">
-        <h2 class="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <h2 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl">
           Your Coffee Pals
         </h2>
         <MembersList />

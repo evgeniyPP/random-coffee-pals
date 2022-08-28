@@ -5,7 +5,7 @@ const Layout: Component<{ children: JSX.Element }> = props => {
   return (
     <>
       <Header />
-      <div class="bg-white min-h-main">{props.children}</div>
+      <div class="theme-default min-h-main">{props.children}</div>
     </>
   );
 };
