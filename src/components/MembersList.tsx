@@ -6,6 +6,8 @@ import { supabase } from '../utils/api';
 import { openModal } from './Modal';
 import { isLoading, setIsLoading } from '../stores/loading';
 import { showErrorNotification } from './Notification';
+import CheckIcon from './icons/CheckIcon';
+import MarkIcon from './icons/MarkIcon';
 
 const MembersList: Component = () => {
   const [editedMemberId, setEditedMemberId] = createSignal<number | null>(null);
@@ -148,20 +150,7 @@ const MembersList: Component = () => {
                             class="-ml-px relative px-4 py-2 border border-gray-300 text-sm font-medium rounded-tr-md btn-default focus-default"
                           >
                             <span class="sr-only">Update pal</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke-width="2"
-                              stroke="currentColor"
-                              class="w-4 h-4"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M3 13.5l6.75 6.75L21 4.5"
-                              />
-                            </svg>
+                            <CheckIcon size={4} />
                           </button>
                         </div>
 
@@ -182,20 +171,7 @@ const MembersList: Component = () => {
                             class="-ml-px relative px-4 py-2 border border-gray-300 text-sm font-medium rounded-br-md btn-default focus-default"
                           >
                             <span class="sr-only">Cancel update</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke-width="2"
-                              stroke="currentColor"
-                              class="w-4 h-4"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
+                            <MarkIcon size={4} />
                           </button>
                         </div>
                       </div>

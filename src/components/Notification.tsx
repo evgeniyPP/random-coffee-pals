@@ -1,4 +1,8 @@
 import { Component, createSignal, Match, Show, Switch } from 'solid-js';
+import CheckCircleIcon from './icons/CheckCircleIcon';
+import ExclamationCircleIcon from './icons/ExclamationCircleIcon';
+import InformationCircleIcon from './icons/InformationCircleIcon';
+import MarkIcon from './icons/MarkIcon';
 
 export interface NotificationOptions {
   title: string;
@@ -45,53 +49,13 @@ const Notification: Component = () => {
                 <div class="flex-shrink-0">
                   <Switch>
                     <Match when={type() === 'default'}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        class="w-6 h-6 text-yellow-600"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-                        />
-                      </svg>
+                      <InformationCircleIcon size={6} class="text-yellow-600" />
                     </Match>
                     <Match when={type() === 'success'}>
-                      <svg
-                        class="h-6 w-6 text-green-500"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
+                      <CheckCircleIcon size={6} class="text-green-500" />
                     </Match>
                     <Match when={type() === 'danger'}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        class="w-6 h-6 text-red-500"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
-                        />
-                      </svg>
+                      <ExclamationCircleIcon size={6} class="text-red-500" />
                     </Match>
                   </Switch>
                 </div>
@@ -105,19 +69,7 @@ const Notification: Component = () => {
                     class="bg-white dark:bg-gray-800 rounded-md inline-flex text-gray-400 hover:text-gray-500 focus-default"
                   >
                     <span class="sr-only">Close</span>
-                    <svg
-                      class="h-5 w-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
+                    <MarkIcon size={5} />
                   </button>
                 </div>
               </div>
