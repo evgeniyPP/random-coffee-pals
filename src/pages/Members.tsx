@@ -12,6 +12,7 @@ import { getMembers, members } from '../stores/members';
 import { supabase } from '../utils/api';
 import { createMeets } from '../utils/helpers';
 import { getUniqueName } from '../utils/name-generator';
+import { t } from '../utils/text';
 
 const Members: Component = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Members: Component = () => {
 
     if (activeMembers.length % 2 !== 0) {
       openModal({
-        title: 'You have an odd number of active pals',
+        title: `You have an odd number of active ${t('pal')}s`,
         content: 'This means someone will not get a pair. Are you sure you want to continue?',
         action: () => generate(),
         actionLabel: 'Continue'
@@ -77,7 +78,7 @@ const Members: Component = () => {
     <Show when={members()?.length}>
       <div class="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex flex-col">
         <h2 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Your Coffee Pals
+          Your {t('Coffee Pals')}
         </h2>
         <MembersList />
         <AddMember />
@@ -85,10 +86,10 @@ const Members: Component = () => {
         <button
           onClick={handleGenerateClick}
           disabled={isLoading()}
-          class="mt-8 inline-flex justify-center items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-yellow-700 hover:bg-yellow-800 focus-default"
+          class="mt-8 inline-flex justify-center items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-primary-700 hover:bg-primary-800 focus-default"
         >
           <Squares2x2Icon size={6} strokeWidth={1.5} class="mr-3" />
-          Take a coffee break
+          Take a {t('coffee')} break
         </button>
       </div>
     </Show>

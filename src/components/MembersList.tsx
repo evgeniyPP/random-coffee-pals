@@ -8,6 +8,7 @@ import { isLoading, setIsLoading } from '../stores/loading';
 import { showErrorNotification } from './Notification';
 import CheckIcon from './icons/CheckIcon';
 import MarkIcon from './icons/MarkIcon';
+import { t } from '../utils/text';
 
 const MembersList: Component = () => {
   const [editedMemberId, setEditedMemberId] = createSignal<number | null>(null);
@@ -81,7 +82,7 @@ const MembersList: Component = () => {
 
   const openDeleteModal = (member: Member) => {
     openModal({
-      title: 'Delete your pal?',
+      title: `Delete your ${t('pal')}?`,
       content: `Are you sure you want to delete ${member.name}?`,
       type: 'danger',
       action: () => deleteMember(member.id),
@@ -130,7 +131,7 @@ const MembersList: Component = () => {
                   <Match when={editedMemberId() === member.id}>
                     <div>
                       <label for="name" class="sr-only">
-                        Pal's name
+                        {t('Pal')}'s name
                       </label>
                       <div class="mt-1 flex flex-col rounded-md shadow-sm -space-y-px">
                         <div class="flex">
@@ -149,7 +150,7 @@ const MembersList: Component = () => {
                             disabled={isLoading() || !editedMemberName().length}
                             class="-ml-px relative px-4 py-2 border border-gray-300 text-sm font-medium rounded-tr-md btn-default focus-default"
                           >
-                            <span class="sr-only">Update pal</span>
+                            <span class="sr-only">Update {t('pal')}</span>
                             <CheckIcon size={4} />
                           </button>
                         </div>
@@ -163,7 +164,7 @@ const MembersList: Component = () => {
                             name="name"
                             id="name"
                             class="block w-full rounded-none rounded-bl-md sm:text-sm border-gray-300 focus-default dark:bg-gray-900"
-                            placeholder={member.contact ?? "Pal's contact"}
+                            placeholder={member.contact ?? `${t('Pal')}'s contact`}
                           />
                           <button
                             onClick={() => clearEdit()}

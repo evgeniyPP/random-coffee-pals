@@ -3,6 +3,7 @@ import { Member } from '../models';
 import { isLoading, setIsLoading } from '../stores/loading';
 import { getMembers } from '../stores/members';
 import { supabase } from '../utils/api';
+import { t } from '../utils/text';
 import { openModal } from './Modal';
 import { showErrorNotification } from './Notification';
 
@@ -16,8 +17,8 @@ const AddMember: Component = () => {
     }
 
     openModal({
-      title: 'Add a new coffee pal?',
-      content: `Are you sure you want to add ${name()} as your coffee pal?`,
+      title: `Add a new ${t('coffee pal')}?`,
+      content: `Are you sure you want to add ${name()} as your ${t('coffee pal')}?`,
       action: () => handleAdd(),
       actionLabel: 'Add'
     });
@@ -62,7 +63,7 @@ const AddMember: Component = () => {
     <div class="mt-8 flex items-center space-x-4">
       <div class="flex-1">
         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Add a new coffee pal
+          Add a new {t('coffee pal')}
         </label>
         <div class="mt-1 flex -space-x-px">
           <input
@@ -73,7 +74,7 @@ const AddMember: Component = () => {
             name="name"
             id="name"
             class="shadow-sm block w-full sm:text-sm border-gray-300 rounded-l-md focus-default dark:bg-gray-900"
-            placeholder="Pal's name"
+            placeholder={`${t('Pal')}'s name`}
           />
           <input
             onInput={e => setContact(e.currentTarget.value)}
@@ -83,7 +84,7 @@ const AddMember: Component = () => {
             name="name"
             id="name"
             class="shadow-sm block w-full sm:text-sm border-gray-300 rounded-r-md focus-default dark:bg-gray-900"
-            placeholder="Pal's contact (optional)"
+            placeholder={`${t('Pal')}'s contact (optional)`}
           />
         </div>
       </div>

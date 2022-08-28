@@ -49,7 +49,7 @@ const Notification: Component = () => {
                 <div class="flex-shrink-0">
                   <Switch>
                     <Match when={type() === 'default'}>
-                      <InformationCircleIcon size={6} class="text-yellow-600" />
+                      <InformationCircleIcon size={6} class="text-primary-600" />
                     </Match>
                     <Match when={type() === 'success'}>
                       <CheckCircleIcon size={6} class="text-green-500" />

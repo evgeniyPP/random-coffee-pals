@@ -6,6 +6,7 @@ import { Break as IBreak, BreakId } from '../models';
 import { setIsLoading } from '../stores/loading';
 import { getMeets, meets } from '../stores/meets';
 import { supabase } from '../utils/api';
+import { t } from '../utils/text';
 
 const Break: Component = () => {
   const params = useParams();
@@ -39,7 +40,7 @@ const Break: Component = () => {
       <Show when={meets()[breakId] && breakData()}>
         <div class="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex flex-col">
           <h2 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl">
-            {breakData()!.name} Coffee Break
+            {breakData()!.name} {t('Coffee')} Break
           </h2>
           <p class="mt-4 text-center">{new Date(breakData()!.created_at).toLocaleDateString()}</p>
 

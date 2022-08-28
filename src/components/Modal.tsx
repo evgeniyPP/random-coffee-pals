@@ -9,7 +9,7 @@ export interface ModalOptions {
   type?: 'default' | 'success' | 'danger';
 }
 
-const colorByType = { default: 'yellow', success: 'green', danger: 'red' };
+const colorByType = { default: 'primary', success: 'green', danger: 'red' };
 const [isModalOpen, setIsModalOpen] = createSignal(false);
 const [title, setTitle] = createSignal('');
 const [content, setContent] = createSignal('');
@@ -83,10 +83,10 @@ const Modal: Component = () => {
                 type="button"
                 class={`w-full rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white focus-default sm:ml-3 sm:w-auto sm:text-sm`}
                 classList={{
-                  'bg-yellow-600': color() === 'yellow',
+                  'bg-primary-600': color() === 'primary',
                   'bg-green-600': color() === 'green',
                   'bg-red-600': color() === 'red',
-                  'hover:bg-yellow-700`': color() === 'yellow',
+                  'hover:bg-primary-700`': color() === 'primary',
                   'hover:bg-green-700`': color() === 'green',
                   'hover:bg-red-700`': color() === 'red'
                 }}

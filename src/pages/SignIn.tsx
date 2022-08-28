@@ -58,7 +58,7 @@ const SignIn: Component = () => {
             If you want to sign up,{' '}
             <a
               href="mailto:aysanru@gmail.com"
-              class="font-medium text-yellow-700 hover:text-yellow-600 focus-default"
+              class="font-medium text-primary-700 hover:text-primary-600 focus-default"
             >
               contact me
             </a>
@@ -140,7 +140,7 @@ const SignIn: Component = () => {
                 <button
                   type="submit"
                   disabled={isLoading()}
-                  class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-700 hover:bg-yellow-800 focus-default"
+                  class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-700 hover:bg-primary-800 focus-default"
                 >
                   Sign in
                 </button>
