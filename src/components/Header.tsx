@@ -1,4 +1,4 @@
-import { Link, useNavigate } from '@solidjs/router';
+import { Link, useLocation, useNavigate } from '@solidjs/router';
 import { Component, Match, Show, Switch } from 'solid-js';
 import { isDarkMode, setDarkMode } from '../stores/dark-mode';
 import { isLoading, setIsLoading } from '../stores/loading';
@@ -11,6 +11,7 @@ import { showErrorNotification } from './Notification';
 
 const Header: Component = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const user = supabase.auth.user();
 
   const handleLogout = async () => {
@@ -53,7 +54,7 @@ const Header: Component = () => {
               <Switch>
                 <Match when={THEME === 'coffee'}>
                   <a
-                    href={TEA_URL}
+                    href={`${TEA_URL}${location.pathname}`}
                     class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-green-700 hover:bg-green-50"
                   >
                     I prefer tea
@@ -61,7 +62,7 @@ const Header: Component = () => {
                 </Match>
                 <Match when={THEME === 'tea'}>
                   <a
-                    href={COFFEE_URL}
+                    href={`${COFFEE_URL}${location.pathname}`}
                     class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-yellow-800 hover:bg-yellow-50"
                   >
                     I prefer coffee
