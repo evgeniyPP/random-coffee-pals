@@ -5,6 +5,7 @@ import Notification from './components/Notification';
 import { setTheme } from './stores/dark-mode';
 import { THEME } from './utils/env';
 import { setFavicon } from './utils/favicon';
+import teaFavicon from './assets/favicon-tea.ico';
 
 const BreakPage = lazy(() => import('./pages/BreakPage'));
 const SignIn = lazy(() => import('./pages/SignIn'));
@@ -14,7 +15,7 @@ const App: Component = () => {
   onMount(() => {
     if (THEME === 'tea') {
       document.title = 'Random Tea Mates';
-      setFavicon('/src/assets/favicon-tea.ico');
+      setFavicon(teaFavicon);
     }
 
     setTheme();
