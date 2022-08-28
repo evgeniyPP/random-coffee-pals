@@ -16,7 +16,7 @@ export async function getMeets(breakId: BreakId, options?: { refetch: boolean })
 
   const { data, error } = await supabase
     .from<MeetWithNames>('meets')
-    .select('break_id, member_1 (name), member_2 (name)')
+    .select('break_id, member_1 (name, contact), member_2 (name, contact)')
     .eq('break_id', breakId);
 
   if (error) {

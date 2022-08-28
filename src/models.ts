@@ -19,6 +19,7 @@ export interface Member {
   id: MemberId;
   user_id: UserId;
   name: string;
+  contact: string | null;
   is_active: boolean;
   created_at: string;
 }
@@ -26,6 +27,7 @@ export interface Member {
 export interface NewMember {
   user_id: UserId;
   name: string;
+  contact?: string;
   is_active?: boolean;
 }
 
@@ -52,8 +54,8 @@ export interface Meet {
 export interface MeetWithNames {
   id: MeetId;
   break_id: BreakId;
-  member_1: { name: string };
-  member_2: { name: string };
+  member_1: { name: string; contact: string | null };
+  member_2: { name: string; contact: string | null };
   created_at: string;
 }
 

@@ -43,10 +43,16 @@ const Break: Component = () => {
               {({ member_1, member_2 }) => (
                 <div class="shadow-lg rounded-lg bg-white sm:grid sm:grid-cols-2">
                   <div class="border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
-                    <span class="text-xl font-bold">{member_1.name}</span>
+                    <p class="text-xl font-bold">{member_1.name}</p>
+                    <Show when={member_1.contact}>
+                      <p class="text-sm text-gray-500 mt-1">{member_1.contact}</p>
+                    </Show>
                   </div>
                   <div class="border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                    <span class="text-xl font-bold">{member_2.name}</span>
+                    <p class="text-xl font-bold">{member_2.name}</p>
+                    <Show when={member_2.contact}>
+                      <p class="text-sm text-gray-500 mt-1">{member_2.contact}</p>
+                    </Show>
                   </div>
                 </div>
               )}

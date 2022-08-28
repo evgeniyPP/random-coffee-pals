@@ -7,6 +7,7 @@ import { openModal } from './Modal';
 
 const AddMember: Component = () => {
   const [name, setName] = createSignal('');
+  const [contact, setContact] = createSignal('');
 
   const openAddModal = () => {
     if (!name().length) {
@@ -22,6 +23,10 @@ const AddMember: Component = () => {
   };
 
   const handleAdd = async () => {
+    if (!name()) {
+      return;
+    }
+
     const user = supabase.auth.user();
 
     if (!user) {
@@ -33,6 +38,7 @@ const AddMember: Component = () => {
       {
         user_id: user.id,
         name: name(),
+        contact: contact() || null,
         is_active: true
       },
       { returning: 'minimal' }
@@ -47,6 +53,7 @@ const AddMember: Component = () => {
 
     await getMembers({ refetch: true });
     setName('');
+    setContact('');
     setIsLoading(false);
   };
 
@@ -56,7 +63,7 @@ const AddMember: Component = () => {
         <label for="name" class="block text-sm font-medium text-gray-700">
           Add a new coffee pal
         </label>
-        <div class="mt-1">
+        <div class="mt-1 flex -space-x-px">
           <input
             onInput={e => setName(e.currentTarget.value)}
             value={name()}
@@ -64,8 +71,18 @@ const AddMember: Component = () => {
             type="text"
             name="name"
             id="name"
-            class="shadow-sm block w-full sm:text-sm border-gray-300 rounded-md focus-default"
+            class="shadow-sm block w-full sm:text-sm border-gray-300 rounded-l-md focus-default"
             placeholder="Pal's name"
+          />
+          <input
+            onInput={e => setContact(e.currentTarget.value)}
+            value={contact()}
+            disabled={isLoading()}
+            type="text"
+            name="name"
+            id="name"
+            class="shadow-sm block w-full sm:text-sm border-gray-300 rounded-r-md focus-default"
+            placeholder="Pal's contact (optional)"
           />
         </div>
       </div>
