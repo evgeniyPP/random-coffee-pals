@@ -53,7 +53,7 @@ const Header: Component = () => {
               <Switch>
                 <Match when={THEME === 'coffee'}>
                   <a
-                    href={COFFEE_URL}
+                    href={TEA_URL}
                     class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-green-700 hover:bg-green-50"
                   >
                     I prefer tea
@@ -61,7 +61,7 @@ const Header: Component = () => {
                 </Match>
                 <Match when={THEME === 'tea'}>
                   <a
-                    href={TEA_URL}
+                    href={COFFEE_URL}
                     class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-yellow-800 hover:bg-yellow-50"
                   >
                     I prefer coffee
