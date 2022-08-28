@@ -8,7 +8,7 @@ import { isLoading, setIsLoading } from '../stores/loading';
 import { supabase } from '../utils/api';
 import { validation } from '../utils/validation';
 
-const SignIn: Component = () => {
+const SignUp: Component = () => {
   const navigate = useNavigate();
   const [validationErrors, setValidationErrors] = createSignal<ZodIssue[]>();
 
@@ -31,7 +31,7 @@ const SignIn: Component = () => {
 
     setIsLoading(true);
     const { data } = validation;
-    const { error } = await supabase.auth.signIn({
+    const { error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password
     });
@@ -53,14 +53,14 @@ const SignIn: Component = () => {
     <>
       <div class="theme-default min-h-screen flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 class="mt-6 text-center text-3xl font-extrabold">Sign in to your account</h2>
+          <h2 class="mt-6 text-center text-3xl font-extrabold">Create a new account</h2>
           <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
-            If you do not have one,{' '}
+            If you already have one,{' '}
             <Link
-              href="/sign-up"
+              href="/login"
               class="font-medium text-primary-700 hover:text-primary-600 focus-default"
             >
-              sign up
+              sign in
             </Link>
           </p>
         </div>
@@ -153,4 +153,4 @@ const SignIn: Component = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

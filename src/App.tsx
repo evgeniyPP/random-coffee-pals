@@ -9,6 +9,7 @@ import teaFavicon from './assets/favicon-tea.ico';
 
 const BreakPage = lazy(() => import('./pages/BreakPage'));
 const SignIn = lazy(() => import('./pages/SignIn'));
+const SignUp = lazy(() => import('./pages/SignUp'));
 const Home = lazy(() => import('./pages/Home'));
 
 const App: Component = () => {
@@ -25,6 +26,7 @@ const App: Component = () => {
     <div classList={{ 'theme-tea': THEME === 'tea' }}>
       <Routes>
         <Route path="/breaks/:id" component={BreakPage} />
+        <Route path="/sign-up" component={SignUp} />
         <Route path="/login" component={SignIn} />
         <Route path="/" component={Home} />
       </Routes>

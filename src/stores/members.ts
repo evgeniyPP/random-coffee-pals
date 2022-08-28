@@ -3,7 +3,7 @@ import { FetchStatus, Member } from '../models';
 import { supabase } from '../utils/api';
 import { setIsLoading } from './loading';
 
-export const [members, setMembers] = createSignal<Member[]>([]);
+export const [members, setMembers] = createSignal<Member[]>();
 const [status, setStatus] = createSignal<FetchStatus>('empty');
 
 export async function getMembers(options?: { refetch: boolean }) {
