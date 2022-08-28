@@ -26,6 +26,7 @@ const Break: Component = () => {
       return;
     }
 
+    setIsLoading(false);
     return data;
   });
 
