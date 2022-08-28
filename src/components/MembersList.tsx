@@ -5,6 +5,7 @@ import { Member, MemberId } from '../models';
 import { supabase } from '../utils/api';
 import { openModal } from './Modal';
 import { isLoading, setIsLoading } from '../stores/loading';
+import { showErrorNotification } from './Notification';
 
 const MembersList: Component = () => {
   const [editedMemberId, setEditedMemberId] = createSignal<number | null>(null);
@@ -19,9 +20,9 @@ const MembersList: Component = () => {
       .eq('id', member.id);
 
     if (error) {
-      // TODO: handle errors
       console.error(error);
       setIsLoading(false);
+      showErrorNotification();
       return;
     }
 
@@ -48,9 +49,9 @@ const MembersList: Component = () => {
       .eq('id', id);
 
     if (error) {
-      // TODO: handle errors
       console.error(error);
       setIsLoading(false);
+      showErrorNotification();
       return;
     }
 
@@ -94,9 +95,9 @@ const MembersList: Component = () => {
       .eq('id', id);
 
     if (error) {
-      // TODO: handle errors
       console.error(error);
       setIsLoading(false);
+      showErrorNotification();
       return;
     }
 

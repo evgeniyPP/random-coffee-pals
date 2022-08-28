@@ -4,6 +4,7 @@ import { isLoading, setIsLoading } from '../stores/loading';
 import { getMembers } from '../stores/members';
 import { supabase } from '../utils/api';
 import { openModal } from './Modal';
+import { showErrorNotification } from './Notification';
 
 const AddMember: Component = () => {
   const [name, setName] = createSignal('');
@@ -45,9 +46,9 @@ const AddMember: Component = () => {
     );
 
     if (error) {
-      // TODO: handle errors
       console.error(error);
       setIsLoading(false);
+      showErrorNotification();
       return;
     }
 

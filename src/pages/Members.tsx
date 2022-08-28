@@ -3,6 +3,7 @@ import { Component, onMount, Show } from 'solid-js';
 import AddMember from '../components/AddMember';
 import MembersList from '../components/MembersList';
 import { openModal } from '../components/Modal';
+import { showErrorNotification } from '../components/Notification';
 import { Break, Meet } from '../models';
 import { isLoading, setIsLoading } from '../stores/loading';
 import { getMeets } from '../stores/meets';
@@ -48,9 +49,9 @@ const Members: Component = () => {
       .single();
 
     if (breakError) {
-      // TODO: handle errors
       console.error(breakError);
       setIsLoading(false);
+      showErrorNotification();
       return;
     }
 
@@ -60,9 +61,9 @@ const Members: Component = () => {
       .insert(newMeets, { returning: 'minimal' });
 
     if (meetsError) {
-      // TODO: handle errors
       console.error(meetsError);
       setIsLoading(false);
+      showErrorNotification();
       return;
     }
 

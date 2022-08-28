@@ -1,7 +1,9 @@
 import { useParams } from '@solidjs/router';
 import { Component, createResource, For, onMount, Show } from 'solid-js';
+import { showErrorNotification } from '../components/Notification';
 import Layout from '../Layout';
 import { Break as IBreak, BreakId } from '../models';
+import { setIsLoading } from '../stores/loading';
 import { getMeets, meets } from '../stores/meets';
 import { supabase } from '../utils/api';
 
@@ -10,6 +12,7 @@ const Break: Component = () => {
   const breakId: BreakId = params.id;
 
   const [breakData] = createResource(async () => {
+    setIsLoading(true);
     const { data, error } = await supabase
       .from<IBreak>('breaks')
       .select('id, name, created_at')
@@ -17,8 +20,9 @@ const Break: Component = () => {
       .single();
 
     if (error) {
-      // TODO: handle errors
       console.error(error);
+      setIsLoading(false);
+      showErrorNotification();
       return;
     }
 

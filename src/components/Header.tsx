@@ -2,6 +2,7 @@ import { Link, useNavigate } from '@solidjs/router';
 import { Component, Show } from 'solid-js';
 import { isLoading, setIsLoading } from '../stores/loading';
 import { supabase } from '../utils/api';
+import { showErrorNotification } from './Notification';
 
 const Header: Component = () => {
   const navigate = useNavigate();
@@ -12,9 +13,9 @@ const Header: Component = () => {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-      // TODO: handle errors
       console.error(error);
       setIsLoading(false);
+      showErrorNotification();
       return;
     }
 

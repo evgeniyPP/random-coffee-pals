@@ -1,4 +1,5 @@
 import { createSignal } from 'solid-js';
+import { showErrorNotification } from '../components/Notification';
 import { BreakId, Meet, MemberId } from '../models';
 import { supabase } from '../utils/api';
 import { members } from './members';
@@ -23,8 +24,8 @@ export async function getLastMeets(breakId: BreakId | null, memberId: MemberId):
     .limit(threshold);
 
   if (error) {
-    // TODO: handle errors
     console.error(error);
+    showErrorNotification();
     return [];
   }
 

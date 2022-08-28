@@ -1,22 +1,26 @@
 import { Component, createSignal, Match, Show, Switch } from 'solid-js';
-import { closeModal } from './Modal';
 
 export interface NotificationOptions {
   title: string;
   content: string;
   type?: 'default' | 'success' | 'danger';
+  time?: number;
 }
 
 const [isNotificationOpen, setIsNotificationOpen] = createSignal(false);
 const [title, setTitle] = createSignal('');
 const [content, setContent] = createSignal('');
-const [type, setType] = createSignal();
+const [type, setType] = createSignal<string>();
 
 export function openNotification(options: NotificationOptions) {
   setTitle(options.title);
   setContent(options.content);
   setType(options.type ?? 'default');
   setIsNotificationOpen(true);
+
+  if (options.time) {
+    setTimeout(() => closeNotification(), options.time);
+  }
 }
 
 export function closeNotification() {
@@ -97,7 +101,7 @@ const Notification: Component = () => {
                 </div>
                 <div class="ml-4 flex-shrink-0 flex">
                   <button
-                    onClick={closeModal}
+                    onClick={closeNotification}
                     class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus-default"
                   >
                     <span class="sr-only">Close</span>
@@ -124,5 +128,14 @@ const Notification: Component = () => {
     </Show>
   );
 };
+
+export function showErrorNotification() {
+  openNotification({
+    title: 'Error',
+    content: 'Something went wrong 😱. Try again later',
+    type: 'danger',
+    time: 4000
+  });
+}
 
 export default Notification;

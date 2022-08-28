@@ -1,5 +1,6 @@
 import { useNavigate } from '@solidjs/router';
 import type { Component } from 'solid-js';
+import { showErrorNotification } from '../components/Notification';
 import { NewUserSchema } from '../schemas';
 import { isLoading, setIsLoading } from '../stores/loading';
 import { supabase } from '../utils/api';
@@ -33,9 +34,9 @@ const SignIn: Component = () => {
     });
 
     if (error) {
-      // TODO: handle errors
       console.error(error);
       setIsLoading(false);
+      showErrorNotification();
       return;
     }
 
