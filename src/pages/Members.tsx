@@ -11,7 +11,7 @@ import { getMeets } from '../stores/meets';
 import { getMembers, members } from '../stores/members';
 import { supabase } from '../utils/api';
 import { createMeets } from '../utils/helpers';
-import { getUniqueName } from '../utils/name-generator';
+import { getUniqueCoffeeName, getUniqueTeaName } from '../utils/name-generator';
 import { t } from '../utils/text';
 
 const Members: Component = () => {
@@ -47,7 +47,11 @@ const Members: Component = () => {
     setIsLoading(true);
     const { data: breakData, error: breakError } = await supabase
       .from<Break>('breaks')
-      .insert({ user_id: user.id, name: getUniqueName() })
+      .insert({
+        user_id: user.id,
+        coffee_name: getUniqueCoffeeName(),
+        tea_name: getUniqueTeaName()
+      })
       .single();
 
     if (breakError) {

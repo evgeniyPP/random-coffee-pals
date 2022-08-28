@@ -34,13 +34,15 @@ export interface NewMember {
 export interface Break {
   id: BreakId;
   user_id: UserId;
-  name: string;
+  coffee_name: string;
+  tea_name: string;
   created_at: string;
 }
 
 export interface NewBreak {
   user_id: UserId;
-  name: string;
+  coffee_name: string;
+  tea_name: string;
 }
 
 export interface Meet {

@@ -1,4 +1,3 @@
-import { THEME } from './env';
 import { getRandomArrayItem } from './helpers';
 
 const coffees = [
@@ -135,4 +134,5 @@ const teas = [
   'Mamaki'
 ];
 
-export const getUniqueName = () => getRandomArrayItem(THEME === 'coffee' ? coffees : teas);
+export const getUniqueCoffeeName = () => getRandomArrayItem(coffees);
+export const getUniqueTeaName = () => getRandomArrayItem(teas);
