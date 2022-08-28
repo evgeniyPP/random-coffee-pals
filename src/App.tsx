@@ -4,13 +4,21 @@ import Modal from './components/Modal';
 import Notification from './components/Notification';
 import { setTheme } from './stores/dark-mode';
 import { THEME } from './utils/env';
+import { setFavicon } from './utils/favicon';
 
 const BreakPage = lazy(() => import('./pages/BreakPage'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const Home = lazy(() => import('./pages/Home'));
 
 const App: Component = () => {
-  onMount(() => setTheme());
+  onMount(() => {
+    if (THEME === 'tea') {
+      document.title = 'Random Tea Mates';
+      setFavicon('/src/assets/favicon-tea.ico');
+    }
+
+    setTheme();
+  });
 
   return (
     <div classList={{ 'theme-tea': THEME === 'tea' }}>
