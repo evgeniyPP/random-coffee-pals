@@ -1,7 +1,10 @@
 import { Link, useNavigate } from '@solidjs/router';
-import { Component, Show } from 'solid-js';
+import { Component, Match, Show, Switch } from 'solid-js';
+import { isDarkMode, setDarkMode } from '../stores/dark-mode';
 import { isLoading, setIsLoading } from '../stores/loading';
 import { supabase } from '../utils/api';
+import MoonIcon from './icons/MoonIcon';
+import SunIcon from './icons/SunIcon';
 import { showErrorNotification } from './Notification';
 
 const Header: Component = () => {
@@ -31,7 +34,20 @@ const Header: Component = () => {
             <Link href="/" class="flex items-center">
               <h1 class="py-2 text-lg font-bold text-white">Random Coffee Pals</h1>
             </Link>
-            <div class="sm:ml-10 space-x-4">
+            <div class="sm:ml-10 space-x-8 flex items-center">
+              <Switch>
+                <Match when={isDarkMode()}>
+                  <button onClick={() => setDarkMode(false)}>
+                    <SunIcon size={6} strokeWidth={1.5} class="text-white" />
+                  </button>
+                </Match>
+                <Match when={!isDarkMode()}>
+                  <button onClick={() => setDarkMode(true)}>
+                    <MoonIcon size={6} strokeWidth={1.5} class="text-white" />
+                  </button>
+                </Match>
+              </Switch>
+
               <Show when={user?.id}>
                 <button
                   onClick={handleLogout}
