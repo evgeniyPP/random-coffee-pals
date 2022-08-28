@@ -129,10 +129,10 @@ const Notification: Component = () => {
   );
 };
 
-export function showErrorNotification() {
+export function showErrorNotification(message?: string) {
   openNotification({
     title: 'Error',
-    content: 'Something went wrong 😱. Try again later',
+    content: message || 'Something went wrong 😱. Try again later',
     type: 'danger',
     time: 4000
   });

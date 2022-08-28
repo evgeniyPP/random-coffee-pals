@@ -38,7 +38,7 @@ const SignIn: Component = () => {
     if (error) {
       console.error(error);
       setIsLoading(false);
-      showErrorNotification();
+      showErrorNotification(error.message);
       return;
     }
 
