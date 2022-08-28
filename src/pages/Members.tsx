@@ -89,7 +89,18 @@ const Members: Component = () => {
           Your {t('Coffee Pals')}
         </h2>
         <MembersList />
-        <AddMember />
+        <Show when={(members() ?? []).length < 20}>
+          <AddMember />
+        </Show>
+        <Show when={(members() ?? []).length === 20}>
+          {/* TODO: add backend check */}
+          <p class="text-sm text-gray-500 dark:text-gray-300 mt-2">
+            You can add up to 20 {t('pals')}. If you need more,{' '}
+            <a href="mailto:aysanru@gmail.com" class="underline">
+              contact me
+            </a>
+          </p>
+        </Show>
 
         <button
           onClick={handleGenerateClick}

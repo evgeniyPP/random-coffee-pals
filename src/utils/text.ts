@@ -5,6 +5,7 @@ const tea: Record<string, string> = {
   Coffee: 'Tea',
   Pal: 'Mate',
   pal: 'mate',
+  pals: 'mates',
   'coffee pal': 'tea mate',
   'Coffee Pals': 'Tea Mates'
 };
