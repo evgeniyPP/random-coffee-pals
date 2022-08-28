@@ -1,5 +1,5 @@
 export function setFavicon(href: string) {
-  let link = document.querySelector("link[rel~='shortcut icon']") as HTMLLinkElement | null;
+  let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
 
   if (!link) {
     link = document.createElement('link');
