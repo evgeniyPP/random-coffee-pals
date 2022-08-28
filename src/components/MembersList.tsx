@@ -109,7 +109,7 @@ const MembersList: Component = () => {
     <ul
       id="members-list"
       role="list"
-      class="divide-y divide-gray-200 mt-8 max-h-[615px] overflow-auto pr-2"
+      class="divide-y divide-gray-200 mt-8 sm:max-h-[615px] sm:overflow-auto sm:pr-2"
     >
       <For each={members()}>
         {member => (
