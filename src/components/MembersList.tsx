@@ -94,7 +94,7 @@ const MembersList: Component = () => {
     setIsLoading(true);
     const { error } = await supabase
       .from<Member>('members')
-      .delete({ returning: 'minimal' })
+      .update({ deleted_at: new Date().toISOString() }, { returning: 'minimal' })
       .eq('id', id);
 
     if (error) {

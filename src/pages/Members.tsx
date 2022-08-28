@@ -24,6 +24,10 @@ const Members: Component = () => {
   const handleGenerateClick = () => {
     const activeMembers = members()?.filter(m => m.is_active) ?? [];
 
+    if (activeMembers.length < 2) {
+      return;
+    }
+
     if (activeMembers.length % 2 !== 0) {
       openModal({
         title: `You have an odd number of active ${t('pal')}s`,
@@ -89,7 +93,7 @@ const Members: Component = () => {
 
         <button
           onClick={handleGenerateClick}
-          disabled={isLoading()}
+          disabled={isLoading() || (members()?.filter(m => m.is_active) || []).length < 2}
           class="mt-8 inline-flex justify-center items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-primary-700 hover:bg-primary-800 focus-default"
         >
           <Squares2x2Icon size={6} strokeWidth={1.5} class="mr-3" />

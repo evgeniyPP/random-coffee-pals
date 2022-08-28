@@ -25,6 +25,7 @@ export async function getMembers(options?: { refetch: boolean }) {
     .from<Member>('members')
     .select('id, name, contact, is_active')
     .eq('user_id', user.id)
+    .is('deleted_at', null)
     .order('is_active', { ascending: false })
     .order('name');
 
