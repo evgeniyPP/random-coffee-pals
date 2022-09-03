@@ -1,5 +1,6 @@
 import { useParams } from '@solidjs/router';
 import { Component, createResource, For, onMount, Show } from 'solid-js';
+import html2canvas from 'html2canvas';
 import { showErrorNotification } from '../components/Notification';
 import Layout from '../Layout';
 import { Break as IBreak, BreakId } from '../models';
@@ -8,6 +9,7 @@ import { getMeets, meets } from '../stores/meets';
 import { supabase } from '../utils/api';
 import { THEME } from '../utils/env';
 import { t } from '../utils/text';
+import { downloadFile } from '../utils/download-file';
 
 const Break: Component = () => {
   const params = useParams();
@@ -32,6 +34,19 @@ const Break: Component = () => {
     return data;
   });
 
+  const takeScreenshot = async () => {
+    const target = document.getElementById('break-info')!;
+    const screenshotBtn = document.getElementById('screenshot-btn')!;
+    screenshotBtn.style.opacity = '0';
+    const canvas = await html2canvas(target);
+    canvas.toBlob(blob => {
+      screenshotBtn.style.opacity = 'initial';
+      const breakName = breakData()![THEME === 'coffee' ? 'coffee_name' : 'tea_name'];
+      const name = `${breakName} ${t('Coffee')} Break`.replace(/\s/g, '_');
+      downloadFile(blob!, name, 'png');
+    });
+  };
+
   onMount(async () => {
     await getMeets(breakId);
   });
@@ -39,7 +54,10 @@ const Break: Component = () => {
   return (
     <Layout>
       <Show when={meets()[breakId] && breakData()}>
-        <div class="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex flex-col">
+        <div
+          id="break-info"
+          class="bg-white dark:bg-gray-900 max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex flex-col"
+        >
           <h2 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl">
             {breakData()![THEME === 'coffee' ? 'coffee_name' : 'tea_name']} {t('Coffee')} Break
           </h2>
@@ -65,6 +83,10 @@ const Break: Component = () => {
               )}
             </For>
           </div>
+
+          <button id="screenshot-btn" onClick={takeScreenshot} class="mt-8">
+            Take a Screenshot
+          </button>
         </div>
       </Show>
     </Layout>

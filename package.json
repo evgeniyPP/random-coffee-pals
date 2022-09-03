@@ -13,7 +13,8 @@
     "solid-js": "^1.4.7",
     "@solidjs/router": "^0.4.2",
     "@supabase/supabase-js": "^1.35.6",
-    "zod": "^3.18.0"
+    "zod": "^3.18.0",
+    "html2canvas": "^1.4.1"
   },
   "devDependencies": {
     "vite": "^3.0.0",
