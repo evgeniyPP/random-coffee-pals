@@ -1,5 +1,5 @@
 import { Route, Routes } from '@solidjs/router';
-import { Component, lazy, onMount } from 'solid-js';
+import { Component, createEffect, createSignal, lazy, onMount } from 'solid-js';
 import Modal from './components/Modal';
 import Notification from './components/Notification';
 import { setTheme } from './stores/dark-mode';
@@ -12,6 +12,8 @@ const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const Home = lazy(() => import('./pages/Home'));
 
+export const [isScrollable, setIsScrollable] = createSignal(true);
+
 const App: Component = () => {
   onMount(() => {
     if (THEME === 'tea') {
@@ -20,6 +22,11 @@ const App: Component = () => {
     }
 
     setTheme();
+  });
+
+  createEffect(() => {
+    const body = document.querySelector('body')!;
+    body.classList[isScrollable() ? 'remove' : 'add']('not-scrollable');
   });
 
   return (

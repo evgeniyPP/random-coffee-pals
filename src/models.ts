@@ -1,5 +1,6 @@
 export type UserId = string;
 export type MemberId = number;
+export type RoomId = number;
 export type BreakId = string;
 export type MeetId = number;
 
@@ -30,6 +31,19 @@ export interface NewMember {
   name: string;
   contact?: string;
   is_active?: boolean;
+}
+
+export interface Room {
+  id: RoomId;
+  user_id: UserId;
+  name: string;
+  created_at: string;
+  deleted_at: string;
+}
+
+export interface NewRoom {
+  user_id: UserId;
+  name: string;
 }
 
 export interface Break {

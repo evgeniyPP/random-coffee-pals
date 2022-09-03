@@ -10,6 +10,7 @@ import { supabase } from '../utils/api';
 import { THEME } from '../utils/env';
 import { t } from '../utils/text';
 import { downloadFile } from '../utils/download-file';
+import { getRooms, rooms } from '../stores/rooms';
 
 const Break: Component = () => {
   const params = useParams();
@@ -49,6 +50,7 @@ const Break: Component = () => {
 
   onMount(async () => {
     await getMeets(breakId);
+    await getRooms();
   });
 
   return (
@@ -65,8 +67,11 @@ const Break: Component = () => {
 
           <div class="mt-8 space-y-4">
             <For each={meets()[breakId]}>
-              {({ member_1, member_2 }) => (
-                <div class="shadow-lg rounded-lg bg-white dark:bg-gray-800 sm:grid sm:grid-cols-2">
+              {({ member_1, member_2 }, index) => (
+                <div class="relative shadow-lg rounded-lg bg-white dark:bg-gray-800 sm:grid sm:grid-cols-2">
+                  <p class="absolute top-0 left-0 w-full flex justify-center">
+                    <span class="bg-white dark:bg-gray-800 py-0.5">{rooms()?.[index()]?.name}</span>
+                  </p>
                   <div class="border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
                     <p class="text-xl font-bold">{member_1.name}</p>
                     <Show when={member_1.contact}>
