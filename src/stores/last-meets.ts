@@ -13,8 +13,8 @@ export async function getLastMeets(breakId: BreakId | null, memberId: MemberId):
     return lastMeets()[cacheId];
   }
 
-  const maxPairNum = Math.ceil([members() ?? []].length / 2);
-  const threshold = maxPairNum > 3 ? 3 : maxPairNum - 1;
+  const maxPairNum = Math.ceil((members() ?? []).length / 2);
+  const threshold = maxPairNum - 1;
 
   if (!threshold) {
     return [];

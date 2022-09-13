@@ -8,9 +8,9 @@ const [currentBreakId, setCurrentBreakId] = createSignal<BreakId | null>(null);
 export async function createMeets(breakId: BreakId): Promise<NewMeet[]> {
   setCurrentBreakId(breakId);
 
-  const activeMembers = members().filter(m => m.is_active);
-  let membersToPair = shuffleArray(activeMembers);
+  const activeMembers = members()?.filter(m => m.is_active) ?? [];
 
+  let membersToPair = shuffleArray(activeMembers);
   let meets: NewMeet[] = [];
 
   while (membersToPair.length > 1) {
