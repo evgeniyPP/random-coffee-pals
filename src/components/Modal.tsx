@@ -10,7 +10,10 @@ export interface ModalOptions {
 }
 
 const colorByType = { default: 'primary', success: 'green', danger: 'red' };
+
 const [isModalOpen, setIsModalOpen] = createSignal(false);
+export { isModalOpen };
+
 const [title, setTitle] = createSignal('');
 const [content, setContent] = createSignal('');
 const [color, setColor] = createSignal(colorByType.default);
