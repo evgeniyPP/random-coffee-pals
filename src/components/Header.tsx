@@ -10,6 +10,7 @@ import MoonIcon from './icons/MoonIcon';
 import SunIcon from './icons/SunIcon';
 import { showErrorNotification } from './Notification';
 import { setIsRoomsOpen } from './Rooms';
+import { setIsBreaksOpen } from './Breaks';
 
 const Header: Component = () => {
   const navigate = useNavigate();
@@ -67,6 +68,13 @@ const Header: Component = () => {
                   class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-primary-800 hover:bg-primary-50"
                 >
                   Rooms
+                </button>
+                <button
+                  onClick={() => setIsBreaksOpen(true)}
+                  disabled={isLoading()}
+                  class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-primary-800 hover:bg-primary-50"
+                >
+                  Breaks
                 </button>
               </Show>
               <Show when={user?.id}>

@@ -4,6 +4,7 @@ import Layout from '../Layout';
 import Intro from './Intro';
 import Members from './Members';
 import Rooms from '../components/Rooms';
+import Breaks from '../components/Breaks';
 
 const Home: Component = () => {
   const user = supabase.auth.user();
@@ -16,6 +17,7 @@ const Home: Component = () => {
     <Layout>
       <Members />
       <Rooms />
+      <Breaks />
     </Layout>
   );
 };
